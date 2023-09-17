@@ -6,8 +6,8 @@ bruteforce discord tokens by gmail
 
 # 💻 Install
 ```zsh
-git clone https://github.com/OSintt/discord-token-bruteforce
-cd discord-token-bruteforce && python tokenbf.py
+git clone https://github.com/YTGuestV4/Discord-Brute-Force-Attack.git
+cd Discord-Brute-Force-Attack && python tokenbf.py
 ```
 
 # 🐼 @me
