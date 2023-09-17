@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import time
 
-start_time = None 
+start_time = None  # Variable to store the start time
 
 def log(message, level="INFO"):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
@@ -48,6 +48,12 @@ def main():
         with open(password_file_path, 'r') as file:
             passwords = file.read().splitlines()
 
+        passwords = [password for password in passwords if len(password) == 8]
+
+        if not passwords:
+            log("No passwords with exactly 8 characters found. Exiting...", "ERROR")
+            return
+
         log("Trying passwords...\n")
 
         start_timer()
@@ -70,7 +76,11 @@ def main():
     else:
         password = input("Enter your password: ")
 
-        start_timer() 
+        if len(password) != 8:
+            log("Password must be exactly 8 characters. Exiting...", "ERROR")
+            return
+
+        start_timer()
 
         while True:
             log(f"Trying password: {password}... ", "INFO")
