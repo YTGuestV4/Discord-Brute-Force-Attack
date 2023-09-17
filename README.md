@@ -1,4 +1,4 @@
-# 🥷 Discord Token Bruteforce
+# 🥷 Discord Password Bruteforce
 ```js 
 <functionalities>
 bruteforce discord tokens by gmail
