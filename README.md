@@ -10,6 +10,6 @@ git clone https://github.com/YTGuestV4/Discord-Brute-Force-Attack.git
 cd Discord-Brute-Force-Attack && python attack.py
 ```
 
-# 🐼 @me
+#  @me
 
 You can find me on discord as 🐤 <a href="https://discord.gg/YQNAcbgenG">@YT</a>
