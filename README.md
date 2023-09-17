@@ -12,4 +12,4 @@ cd Discord-Brute-Force-Attack && python attack.py
 
 # 🐼 @me
 
-You can find me on discord as 🐤 <a href="https://discord.gg/YQNAcbgenG">@osinthappyemo</a>
+You can find me on discord as 🐤 <a href="https://discord.gg/YQNAcbgenG">@YT</a>
