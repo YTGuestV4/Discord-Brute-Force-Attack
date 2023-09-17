@@ -8,12 +8,14 @@ init(autoreset=True)
 def log(message, level="INFO"):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
     if level == "INFO":
-        print(f"{timestamp} {Fore.GREEN}[INFO]{Fore.RESET} {message}")
+        print(f"{timestamp} {Fore.GREEN}[INFO]{Fore.RESET} {message}", end="")
     elif level == "WARNING":
-        print(f"{timestamp} {Fore.YELLOW}[WARNING]{Fore.RESET} {message}")
+        print(f"{timestamp} {Fore.YELLOW}[WARNING]{Fore.RESET} {message}", end="")
     elif level == "ERROR":
-        print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}")
-
+        print(f"{timestamp} {Fore.RED}[ERROR]{Fore.RESET} {message}", end="")
+    else:
+        print(message, end="")
+        
 def main():
     log("YT: Discord Cracker")
     log("--------------------")
