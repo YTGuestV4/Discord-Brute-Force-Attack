@@ -1,7 +1,7 @@
 # 🥷 Discord Password Bruteforce
 ```js 
 <functionalities>
-bruteforce discord tokens by gmail
+bruteforce discord password by gmail
 ```
 
 # 💻 Install
